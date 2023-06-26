@@ -5,10 +5,10 @@ import VladMaltsev.weatherapp.repositories.WeatherDaySnapshotRepo;
 import org.springframework.stereotype.Service;
 
 @Service
-public class WeatherDaySnapshotServise {
+public class WeatherDaySnapshotService {
     private final WeatherDaySnapshotRepo weatherDaySnapshotRepo;
 
-    public WeatherDaySnapshotServise(WeatherDaySnapshotRepo weatherDaySnapshotRepo) {
+    public WeatherDaySnapshotService(WeatherDaySnapshotRepo weatherDaySnapshotRepo) {
         this.weatherDaySnapshotRepo = weatherDaySnapshotRepo;
     }
 

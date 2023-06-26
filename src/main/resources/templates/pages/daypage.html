@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<p th:text="${day.getDate()}">date</p>
+<br/>
+<p th:text="${day.getAddress()}">address</p>
+<br/>
+<p th:text="${day.getAverageHumidity()}">hum</p>
+<br/>
+<p th:text="${day.getAverageTemperature()}">address</p>
+<img th:src="@{img/LondonUK.jpg}" th:alt="${day.getAddress()}"/>
+<!--<img th:src="@{img/${day.getAddress()}.jpg}" th:alt="${day.getAddress()}"/>-->
+<!--<img th:src="@{img/im1.jpg}" alt=""/>-->
+
+</body>
+</html>

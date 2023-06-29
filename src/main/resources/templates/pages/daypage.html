@@ -5,20 +5,12 @@
     <title>Title</title>
 </head>
 <body>
-<p th:text="${day.getDate()}">date</p>
+
 <br/>
-<p th:text="${day.getAddress()}">address</p>
-<br/>
-<p th:text="${day.getAverageHumidity()}">hum</p>
-<br/>
-<p th:text="${day.getAverageTemperature()}">address</p>
-<!--<img th:src="@{img/LondonUK.jpg}" th:alt="${day.getAddress()}"/>-->
-<!--<img th:src="@{img/{ad}.jpg(ad=${day.getAddress()})}" th:alt="${day.getAddress()}"/>-->
-<!--<img th:src="@{charts/LondonUK.jpg}" th:alt="${day.getAddress()}"/>-->
-<img th:src="${image}" th:alt="${day.getAddress()}"/>
-<img th:src="@{image}" th:alt="${day.getAddress()}"/>
-<!--<img th:src="@{img/${day.getAddress()}.jpg}" th:alt="${day.getAddress()}"/>-->
-<!--<img th:src="@{img/im1.jpg}" alt=""/>-->
+<h1 th:text="${city}">address</h1>
+<h1 th:text="${country}">address</h1>
+<h1 th:text="${date}">date</h1>
+<img th:src="@{/image/getsingleday(date=${date}, city=${city}, country=${country})}" th:alt="Badrequest"/>
 
 </body>
 </html>

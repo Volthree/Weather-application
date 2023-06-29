@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Last 14 days</title>
+</head>
+<body>
+
+<br/>
+<h1 th:text="${city}">address</h1>
+<h1 th:text="${country}">address</h1>
+<h1>Last 14 days</h1>
+<img th:src="@{/image/getlastdays(city=${city}, country=${country})}" th:alt="Badrequest"/>
+
+</body>
+</html>

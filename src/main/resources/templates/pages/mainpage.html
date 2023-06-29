@@ -7,8 +7,10 @@
 <body>
 
 <h1 style="color: blueviolet">This is weather app</h1>
+<br/>
+<h1 style="color: blueviolet">Search single day weather</h1>
 
-    <form name="f" method="GET" th:action="@{/weather}">
+    <form name="f" method="GET" th:action="@{/singleday}">
 
         <label for="town">Enter city</label>
         <input type="text" name="city" id="town"/>
@@ -22,6 +24,17 @@
         <input type="submit" value="Search"/>
     </form>
 
+<h1 style="color: blueviolet">Search last 14 days weather</h1>
+
+<form name="f" method="GET" th:action="@{/lastdays}">
+
+    <label for="t">Enter city</label>
+    <input type="text" name="city" id="t"/>
+    <br/>
+    <label for="co">Enter country</label>
+    <input type="text" name="country" id="co"/>
+    <br/>
+    <input type="submit" value="Search"/>
 </form>
 </body>
 </html>

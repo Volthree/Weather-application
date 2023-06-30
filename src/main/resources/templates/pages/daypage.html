@@ -6,11 +6,12 @@
 </head>
 <body>
 
+<h1>Weather for the selected day</h1>
 <br/>
 <h1 th:text="${city}">address</h1>
 <h1 th:text="${country}">address</h1>
 <h1 th:text="${date}">date</h1>
-<img th:src="@{/image/getsingleday(date=${date}, city=${city}, country=${country})}" th:alt="Badrequest"/>
+<img th:src="@{/image/getsingleday(date=${date}, city=${city}, country=${country})}" th:alt="BadRequest"/>
 
 </body>
 </html>

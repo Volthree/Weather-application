@@ -1,9 +1,11 @@
 package VladMaltsev.weatherapp.controller;
 
-import VladMaltsev.weatherapp.Servise.WeatherDaySnapshotService;
-import VladMaltsev.weatherapp.Servise.WeatherDuringDayService;
+import VladMaltsev.weatherapp.servise.WeatherDaySnapshotService;
+import VladMaltsev.weatherapp.servise.WeatherDuringDayService;
 import VladMaltsev.weatherapp.models.WeatherDaySnapshot;
 import VladMaltsev.weatherapp.models.WeatherDuringDay;
+import VladMaltsev.weatherapp.util.ChartImageErrorResponse;
+import VladMaltsev.weatherapp.util.ImageNotFoundException;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -11,8 +13,8 @@ import org.knowm.xchart.*;
 import org.springframework.http.*;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.client.HttpClientErrorException;
 import org.springframework.web.client.RestTemplate;
-
 import java.io.*;
 import java.time.LocalDate;
 import java.util.LinkedList;
@@ -30,11 +32,10 @@ public class WeatherRESTController {
         this.weatherDuringDayService = weatherDuringDayService;
     }
 
-    @GetMapping(value = "/getsingleday",
-            produces = MediaType.APPLICATION_OCTET_STREAM_VALUE)
+    @GetMapping(value = "/getsingleday")
     public byte[] getSingleDay(@RequestParam(name = "city") String city,
                                @RequestParam(name = "country") String country,
-                               @RequestParam(name = "date") LocalDate date) throws IOException {
+                               @RequestParam(name = "date") LocalDate date, Model model) throws IOException {
 
         String data = getDataFromPage(city, country, date);
 
@@ -43,7 +44,7 @@ public class WeatherRESTController {
 
         List<WeatherDuringDay> w = parseDataDuringDay(data, weatherDaySnapshot, 0);
         weatherDuringDayService.addListDuringDay(w);
-
+        model.addAttribute("gggg", "All bad");
         return createGraphicsHours(w, country, city);
     }
 
@@ -60,8 +61,15 @@ public class WeatherRESTController {
         return createGraphicsDays(weatherDaySnapshot, country, city);
     }
 
+    @GetMapping(value = "/imageerror")
+    public ResponseEntity<ChartImageErrorResponse> errorres(){
+        ChartImageErrorResponse c = new ChartImageErrorResponse("Bad name Country or City or Date");
+        return new ResponseEntity<>(c, HttpStatus.NOT_FOUND);
+    }
 
-    private String getDataFromPage(String town, String country, LocalDate data) throws IOException {
+
+
+    private String getDataFromPage(String town, String country, LocalDate data) {
         RestTemplate restTemplate = new RestTemplate();
         String url;
         if (data == null) {
@@ -73,12 +81,15 @@ public class WeatherRESTController {
                     "VisualCrossingWebServices/rest/services/timeline/" + town + "," + country + "/" + data +
                     "/?key=RDG2GVFL5SRQ9CU7S63N2WMNK";
         }
-        /////Read local data//////
-//        byte[] b = Files.readAllBytes(Paths.get("E:\\All Java\\weatherapp\\src\\main\\resources\\static\\JSONData.json"));
-//        String resJSON = new String(b);
-        //////////////
 
-        return restTemplate.getForObject(url, String.class);
+        String jsonData;
+        try {
+            jsonData = restTemplate.getForObject(url, String.class);
+        }
+        catch (HttpClientErrorException e){
+            throw new ImageNotFoundException();
+        }
+        return jsonData;
     }
 
     private List<WeatherDaySnapshot> parseData(String data) throws JsonProcessingException {
@@ -136,7 +147,7 @@ public class WeatherRESTController {
             humPerHour[i] = w.getHum();
             i++;
         }
-        return getBytes(country, city, hour, tempPerHour, windPerHour, humPerHour);
+        return getBytes(country, city, hour, tempPerHour, windPerHour, humPerHour, "Hour");
     }
 
     private byte[] createGraphicsDays(List<WeatherDaySnapshot> weatherDaySnapshotList, String country, String city) throws IOException {
@@ -153,19 +164,25 @@ public class WeatherRESTController {
             humPerDay[i] = w.getAverageHumidity();
             i++;
         }
-        return getBytes(country, city, day, tempPerDay, windPerDay, humPerDay);
+        return getBytes(country, city, day, tempPerDay, windPerDay, humPerDay, "Days");
     }
 
-    private byte[] getBytes(String country, String city, double[] dXStep, double[] temperature, double[] windSpeed, double[] humidity) throws IOException {
+    private byte[] getBytes(String country, String city, double[] dXStep, double[] temperature, double[] windSpeed, double[] humidity, String interval) throws IOException {
         XYChart chart = new XYChartBuilder().
                 width(800).height(600).
                 title(country + ", " + city).
-                xAxisTitle("Hour").yAxisTitle("Amount").build();
+                xAxisTitle(interval).yAxisTitle("Amount").build();
 
         chart.addSeries("Temperature, F", dXStep, temperature);
         chart.addSeries("Windspeed*5, mi/h", dXStep, windSpeed);
         chart.addSeries("Humidity, %", dXStep, humidity);
 
         return BitmapEncoder.getBitmapBytes(chart, BitmapEncoder.BitmapFormat.JPG);
+    }
+
+    @ExceptionHandler({ImageNotFoundException.class})
+    private ResponseEntity<ChartImageErrorResponse> handleImageException(){
+        ChartImageErrorResponse c = new ChartImageErrorResponse("Bad name Country or City or Date");
+        return new ResponseEntity<>(c, HttpStatus.NOT_FOUND);
     }
 }

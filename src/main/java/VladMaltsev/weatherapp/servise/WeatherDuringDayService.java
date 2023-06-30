@@ -1,4 +1,4 @@
-package VladMaltsev.weatherapp.Servise;
+package VladMaltsev.weatherapp.servise;
 
 import VladMaltsev.weatherapp.models.WeatherDuringDay;
 import VladMaltsev.weatherapp.repositories.WeatherDuringDayRepo;

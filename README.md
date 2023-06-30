@@ -7,7 +7,7 @@ All parsed data saved in MySql database, Charts created via XChart library.
 
 Used: Spring Boot, Data, REST, Hibernate, Maven, SQL(MySql), DI, IOC
 
-![1](screenshots/mainpage.png)  ![2](screenshots/singleday.png)  ![3](twoweeks/singleday.png)  
+![1](screenshots/mainpage.png)  ![2](screenshots/singleday.png)  ![3](screenshots/twoweeks.png)  
 
 
 

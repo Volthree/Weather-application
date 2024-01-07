@@ -1,5 +1,9 @@
 package VladMaltsev.weatherapp.controller;
 
+
+import lombok.extern.slf4j.Slf4j;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -10,8 +14,8 @@ import java.time.LocalDate;
 
 @Controller
 @RequestMapping()
+@Slf4j
 public class WeatherController {
-
     @GetMapping()
     public String getMainPage(){
         return "pages/mainpage";
@@ -24,6 +28,7 @@ public class WeatherController {
         model.addAttribute("country", country);
         model.addAttribute("city", city);
         model.addAttribute("date", date);
+        log.debug("/singleday: city-" + city + " country-"+country+" date-"+date);
         return "pages/daypage";
     }
     @GetMapping("/lastdays")
@@ -32,6 +37,7 @@ public class WeatherController {
                                Model model){
         model.addAttribute("country", country);
         model.addAttribute("city", city);
+        log.debug("/lastdays: city-" + city + " country-"+country);
         return "pages/lastdays";
     }
 }

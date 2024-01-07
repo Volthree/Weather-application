@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Configuration status="WARN" monitorInterval="10">
+    <Properties>
+        <Property name="LOG_PATTERN">
+            %d{yyyy-MM-dd} %-5p %c{1}:%L - %m%n
+        </Property>
+    </Properties>
+    <Appenders>
+        <RollingFile name="FileAppender" fileName="logs/WeatherAppLogs.log"
+                     filePattern="logs/WeatherAppLogs1.log" append ="false">
+            <PatternLayout>
+                <Pattern>${LOG_PATTERN}</Pattern>
+            </PatternLayout>
+            <Policies>
+                <SizeBasedTriggeringPolicy size="10KB" />
+            </Policies>
+            <DefaultRolloverStrategy max="1"/>
+        </RollingFile>
+    </Appenders>
+    <Loggers>
+        <Root level="fatal">
+            <AppenderRef ref="FileAppender"/>
+        </Root>
+
+        <logger name="VladMaltsev.weatherapp.controller" level="debug">
+            <AppenderRef ref="FileAppender"/>
+        </logger>
+    </Loggers>
+
+</Configuration>

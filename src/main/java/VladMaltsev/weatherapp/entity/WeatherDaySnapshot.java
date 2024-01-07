@@ -1,11 +1,10 @@
-package VladMaltsev.weatherapp.models;
+package VladMaltsev.weatherapp.entity;
 
 import jakarta.persistence.*;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import java.time.LocalDate;
 import java.util.List;
-import java.util.Map;
 
 @Entity
 @Table(name = "weather_summary")
@@ -94,14 +93,6 @@ public class WeatherDaySnapshot {
 
     @Override
     public String toString() {
-        return "WeatherDaySnapshot{" +
-                "id=" + id +
-                ", date=" + date +
-                ", address='" + address + '\'' +
-                ", averageTemperature=" + averageTemperature +
-                ", averageHumidity=" + averageHumidity +
-                ", averageWindSpeed=" + averageWindSpeed +
-                ", wduringDay=" + wduringDay +
-                '}';
+        return Integer.toString(id);
     }
 }

@@ -1,5 +1,8 @@
 package VladMaltsev.weatherapp.controller;
 
+
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -11,7 +14,6 @@ import java.time.LocalDate;
 @Controller
 @RequestMapping()
 public class WeatherController {
-
     @GetMapping()
     public String getMainPage(){
         return "pages/mainpage";

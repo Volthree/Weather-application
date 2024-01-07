@@ -1,4 +1,4 @@
-package VladMaltsev.weatherapp.models;
+package VladMaltsev.weatherapp.entity;
 
 import jakarta.persistence.*;
 

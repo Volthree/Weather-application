@@ -2,22 +2,27 @@ package VladMaltsev.weatherapp.controller;
 
 import VladMaltsev.weatherapp.dto.WeatherDaySnapshotDTO;
 import VladMaltsev.weatherapp.dto.WeatherDuringDayDTO;
-import VladMaltsev.weatherapp.servise.WeatherDaySnapshotService;
-import VladMaltsev.weatherapp.servise.WeatherDuringDayService;
 import VladMaltsev.weatherapp.entity.WeatherDaySnapshot;
 import VladMaltsev.weatherapp.entity.WeatherDuringDay;
+import VladMaltsev.weatherapp.servise.WeatherDaySnapshotService;
+import VladMaltsev.weatherapp.servise.WeatherDuringDayService;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.http.*;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.http.MediaType;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
 
-import java.io.*;
+import java.io.IOException;
 import java.time.LocalDate;
 import java.util.List;
 
+import static VladMaltsev.weatherapp.util.ImageGeneration.GetImage.createGraphicsDays;
+import static VladMaltsev.weatherapp.util.ImageGeneration.GetImage.createGraphicsHours;
 import static VladMaltsev.weatherapp.util.dtoconversion.MappingDTOAndClass.mapListDTOAndListClass;
-import static VladMaltsev.weatherapp.util.getdata.GetDataByTownCityDate.*;
-import static VladMaltsev.weatherapp.util.getdata.DataParser.*;
-import static VladMaltsev.weatherapp.util.ImageGeneration.GetImage.*;
+import static VladMaltsev.weatherapp.util.getdata.DataParser.parseDataDuringDay;
+import static VladMaltsev.weatherapp.util.getdata.DataParser.parseDataForTwoWeeks;
+import static VladMaltsev.weatherapp.util.getdata.GetDataByTownCityDate.getData;
 
 @RestController
 @Slf4j
@@ -36,18 +41,14 @@ public class WeatherRESTController {
     public byte[] getSingleDay(@RequestParam(name = "city") String city,
                                @RequestParam(name = "country") String country,
                                @RequestParam(name = "date") LocalDate date) throws IOException {
-        log.error("Enter GetSingleDay method");
+        log.debug("/getsingleday getData(): "+city+" "+country+" "+date);
         String data = getData(city, country, date);
-        log.error("After getData method");
         List<WeatherDaySnapshotDTO> weatherDaySnapshotDTO = parseDataForTwoWeeks(data);
-        log.error("After parseDataForTwoWeeks");
         weatherDaySnapshotDTO = weatherDaySnapshotService.insertNewWeatherSnapshot(weatherDaySnapshotDTO);
-        log.error("After insertNewWeatherSnapshot in singleDay");
-        log.error("WeatherDaySnapshotDTO in Controller " + weatherDaySnapshotDTO.get(0));
+        log.debug("WeatherDaySnapshotDTO in Controller " + weatherDaySnapshotDTO.get(0));
         List<WeatherDuringDayDTO> w = parseDataDuringDay(data, weatherDaySnapshotDTO, 0);
-        log.error("After parseDataDuringDay");
         weatherDuringDayService.addListDuringDay(w);
-        log.error("After addListDuringDay");
+        log.debug("After addListDuringDay (success)");
         return createGraphicsHours(mapListDTOAndListClass(w, WeatherDuringDay.class), country, city);
     }
 
@@ -55,11 +56,11 @@ public class WeatherRESTController {
             produces = MediaType.APPLICATION_OCTET_STREAM_VALUE)
     public byte[] getLastTwoWeeks(@RequestParam(name = "city") String city,
                                   @RequestParam(name = "country") String country) throws IOException {
-
+        log.debug("/getlastdays getData(): "+city+" "+country+" "+null);
         String data = getData(city, country, null);
         List<WeatherDaySnapshotDTO> weatherDaySnapshotDTO = parseDataForTwoWeeks(data);
         weatherDaySnapshotService.insertNewWeatherSnapshot(weatherDaySnapshotDTO);
-
+        log.debug("After insertNewWeatherSnapshot (success)");
         return createGraphicsDays(mapListDTOAndListClass(weatherDaySnapshotDTO, WeatherDaySnapshot.class), country, city);
     }
 

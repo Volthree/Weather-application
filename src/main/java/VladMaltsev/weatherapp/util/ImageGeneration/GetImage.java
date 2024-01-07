@@ -28,7 +28,7 @@ public class GetImage {
         return getBytes(country, city, hour, tempPerHour, windPerHour, humPerHour, "Hour");
     }
 
-    public  static byte[] createGraphicsDays(List<WeatherDaySnapshot> weatherDaySnapshotList, String country, String city) throws IOException {
+    public static byte[] createGraphicsDays(List<WeatherDaySnapshot> weatherDaySnapshotList, String country, String city) throws IOException {
         double[] day = new double[15];
         double[] tempPerDay = new double[15];
         double[] windPerDay = new double[15];

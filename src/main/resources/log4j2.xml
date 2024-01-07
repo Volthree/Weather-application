@@ -18,11 +18,11 @@
         </RollingFile>
     </Appenders>
     <Loggers>
-        <Root level="fatal">
-            <AppenderRef ref="FileAppender"/>
-        </Root>
+<!--        <Root level="fatal">-->
+<!--            <AppenderRef ref="FileAppender"/>-->
+<!--        </Root>-->
 
-        <logger name="VladMaltsev.weatherapp.controller" level="debug">
+        <logger name="VladMaltsev.weatherapp" level="debug">
             <AppenderRef ref="FileAppender"/>
         </logger>
     </Loggers>

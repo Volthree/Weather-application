@@ -1,6 +1,8 @@
 package VladMaltsev.weatherapp.entity;
 
 import jakarta.persistence.*;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import java.time.LocalDate;
@@ -8,6 +10,8 @@ import java.util.List;
 
 @Entity
 @Table(name = "weather_summary")
+@Data
+@NoArgsConstructor
 public class WeatherDaySnapshot {
 
     @Id
@@ -31,65 +35,6 @@ public class WeatherDaySnapshot {
 
     @OneToMany(mappedBy = "weatherDaySnapshot")
     private List<WeatherDuringDay> wduringDay;
-
-    public WeatherDaySnapshot() {
-    }
-
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }
-
-    public LocalDate getDate() {
-        return date;
-    }
-
-    public void setDate(LocalDate date) {
-        this.date = date;
-    }
-
-    public String getAddress() {
-        return address;
-    }
-
-    public void setAddress(String address) {
-        this.address = address;
-    }
-
-    public float getAverageTemperature() {
-        return averageTemperature;
-    }
-
-    public void setAverageTemperature(float averageTemperature) {
-        this.averageTemperature = averageTemperature;
-    }
-
-    public float getAverageHumidity() {
-        return averageHumidity;
-    }
-
-    public void setAverageHumidity(float averageHumidity) {
-        this.averageHumidity = averageHumidity;
-    }
-
-    public float getAverageWindSpeed() {
-        return averageWindSpeed;
-    }
-
-    public void setAverageWindSpeed(float averageWindSpeed) {
-        this.averageWindSpeed = averageWindSpeed;
-    }
-
-    public List<WeatherDuringDay> getWduringDay() {
-        return wduringDay;
-    }
-
-    public void setWduringDay(List<WeatherDuringDay> wduringDay) {
-        this.wduringDay = wduringDay;
-    }
 
     @Override
     public String toString() {

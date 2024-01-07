@@ -3,7 +3,6 @@ package VladMaltsev.weatherapp.util.getdata;
 import VladMaltsev.weatherapp.dto.WeatherDaySnapshotDTO;
 import VladMaltsev.weatherapp.dto.WeatherDuringDayDTO;
 import VladMaltsev.weatherapp.entity.WeatherDaySnapshot;
-import static VladMaltsev.weatherapp.util.dtoconversion.MappingDTOAndClass.*;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -12,6 +11,8 @@ import lombok.extern.slf4j.Slf4j;
 import java.time.LocalDate;
 import java.util.LinkedList;
 import java.util.List;
+
+import static VladMaltsev.weatherapp.util.dtoconversion.MappingDTOAndClass.mapDTOAndClass;
 
 
 @Slf4j

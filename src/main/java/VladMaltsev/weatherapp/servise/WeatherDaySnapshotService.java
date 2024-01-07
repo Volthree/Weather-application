@@ -20,16 +20,14 @@ public class WeatherDaySnapshotService {
         this.weatherDaySnapshotRepo = weatherDaySnapshotRepo;
     }
 
-    public List<WeatherDaySnapshotDTO> insertNewWeatherSnapshot(List<WeatherDaySnapshotDTO> weatherDaySnapshotDTO){
-        log.error("WeatherDaySnapshotDTO after parsing JSON "+weatherDaySnapshotDTO.toString());
+    public List<WeatherDaySnapshotDTO> insertNewWeatherSnapshot(List<WeatherDaySnapshotDTO> weatherDaySnapshotDTO) {
+        log.debug("WeatherDaySnapshotDTO after parsing JSON " + weatherDaySnapshotDTO.toString());
         List<WeatherDaySnapshot> weatherDaySnapshot = mapListDTOAndListClass(weatherDaySnapshotDTO, WeatherDaySnapshot.class);
-        log.error("WeatherDaySnapshot after convert DTO-Class " + weatherDaySnapshot);
+        log.debug("WeatherDaySnapshot after convert DTO-Class " + weatherDaySnapshot);
         weatherDaySnapshotRepo.saveAll(weatherDaySnapshot);
-        log.error("WeatherDaySnapshot after save " + weatherDaySnapshot);
+        log.debug("WeatherDaySnapshot after save " + weatherDaySnapshot);
         return MappingDTOAndClass.mapListDTOAndListClass(weatherDaySnapshot, WeatherDaySnapshotDTO.class);
     }
-
-
 
 
 }

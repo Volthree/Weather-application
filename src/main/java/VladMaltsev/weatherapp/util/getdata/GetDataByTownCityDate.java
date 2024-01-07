@@ -13,16 +13,16 @@ import java.time.LocalDate;
 public class GetDataByTownCityDate {
 
     public static String getDataFromSource(String town, String country, LocalDate date) throws ImageNotFoundException {
-        log.error("Start getDataFromSource method");
+        log.debug("Start getDataFromSource method");
         RestTemplate restTemplate = new RestTemplate();
         String url;
         if (date == null) {
-            log.error("Date == null");
+            log.debug("Date == null");
             url = "https://weather.visualcrossing.com/" +
                     "VisualCrossingWebServices/rest/services/timeline/" + town + "," + country +
                     "/?key=RDG2GVFL5SRQ9CU7S63N2WMNK";
         } else {
-            log.error("Date != null");
+            log.debug("Date != null");
             url = "https://weather.visualcrossing.com/" +
                     "VisualCrossingWebServices/rest/services/timeline/" + town + "," + country + "/" + date +
                     "/?key=RDG2GVFL5SRQ9CU7S63N2WMNK";
@@ -30,11 +30,11 @@ public class GetDataByTownCityDate {
 
         String jsonData;
         try {
-            log.error("Try get jsonData");
+            log.debug("Try get jsonData");
             jsonData = restTemplate.getForObject(url, String.class);
-            log.error("GsonData got success");
+            log.debug("JsonData got success");
         } catch (HttpClientErrorException e) {
-            log.error("HttpClientErrorException: " + e.getMessage());
+            log.debug("HttpClientErrorException: " + e.getMessage());
             throw new ImageNotFoundException(e.getMessage());
         }
         return jsonData;
@@ -42,11 +42,11 @@ public class GetDataByTownCityDate {
 
     public static String getData(String city, String country, LocalDate date){
         try {
-            log.error("Try getDataFromSource");
+            log.debug("Try getDataFromSource");
             return getDataFromSource(city, country, date);
         }
         catch (ImageNotFoundException e) {
-            log.error("Catch ImageNotFoundException: " + e.getMessage());
+            log.debug("Catch ImageNotFoundException: " + e.getMessage());
             throw new ResponseStatusException(
                     HttpStatus.NOT_FOUND, "Bad name Country or City or Date", e);
         }

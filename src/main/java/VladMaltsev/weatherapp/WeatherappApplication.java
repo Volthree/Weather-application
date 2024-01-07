@@ -13,10 +13,8 @@ import org.springframework.web.client.RestTemplate;
 @Slf4j
 public class WeatherappApplication {
 
-	public static void main(String[] args) throws JsonProcessingException {
+	public static void main(String[] args) {
 		SpringApplication.run(WeatherappApplication.class, args);
-
-
 	}
 
 }

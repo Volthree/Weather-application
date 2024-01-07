@@ -5,6 +5,7 @@ import VladMaltsev.weatherapp.entity.WeatherDuringDay;
 import VladMaltsev.weatherapp.repositories.WeatherDuringDayRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -19,6 +20,7 @@ public class WeatherDuringDayService {
         this.weatherDuringDayRepo = weatherDuringDayRepo;
     }
 
+    @Transactional
     public void addListDuringDay(List<WeatherDuringDayDTO> weatherDuringDayListDTO){
         List<WeatherDuringDay> weatherDuringDayList = mapListDTOAndListClass(weatherDuringDayListDTO, WeatherDuringDay.class);
         weatherDuringDayRepo.saveAll(weatherDuringDayList);

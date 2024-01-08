@@ -18,7 +18,7 @@
         </RollingFile>
     </Appenders>
     <Loggers>
-<!--        <Root level="fatal">-->
+<!--        <Root level="debug">-->
 <!--            <AppenderRef ref="FileAppender"/>-->
 <!--        </Root>-->
 

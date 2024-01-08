@@ -6,6 +6,7 @@ import VladMaltsev.weatherapp.repositories.WeatherDaySnapshotRepo;
 import VladMaltsev.weatherapp.util.dtoconversion.MappingDTOAndClass;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -19,7 +20,7 @@ public class WeatherDaySnapshotService {
     public WeatherDaySnapshotService(WeatherDaySnapshotRepo weatherDaySnapshotRepo) {
         this.weatherDaySnapshotRepo = weatherDaySnapshotRepo;
     }
-
+    @Transactional
     public List<WeatherDaySnapshotDTO> insertNewWeatherSnapshot(List<WeatherDaySnapshotDTO> weatherDaySnapshotDTO) {
         log.debug("WeatherDaySnapshotDTO after parsing JSON " + weatherDaySnapshotDTO.toString());
         List<WeatherDaySnapshot> weatherDaySnapshot = mapListDTOAndListClass(weatherDaySnapshotDTO, WeatherDaySnapshot.class);

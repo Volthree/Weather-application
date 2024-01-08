@@ -8,10 +8,7 @@ import VladMaltsev.weatherapp.servise.WeatherDaySnapshotService;
 import VladMaltsev.weatherapp.servise.WeatherDuringDayService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.MediaType;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.io.IOException;
 import java.time.LocalDate;
@@ -27,6 +24,7 @@ import static VladMaltsev.weatherapp.util.getdata.GetDataByTownCityDate.getData;
 @RestController
 @Slf4j
 @RequestMapping(value = "/image")
+@SessionAttributes
 public class WeatherRESTController {
 
     private final WeatherDaySnapshotService weatherDaySnapshotService;

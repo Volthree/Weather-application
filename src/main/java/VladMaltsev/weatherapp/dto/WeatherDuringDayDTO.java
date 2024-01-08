@@ -1,11 +1,13 @@
 package VladMaltsev.weatherapp.dto;
 
 import VladMaltsev.weatherapp.entity.WeatherDaySnapshot;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
 
 @Getter
 @Setter
+@Builder
+@NoArgsConstructor
+@AllArgsConstructor
 public class WeatherDuringDayDTO {
     private int id;
     private WeatherDaySnapshot weatherDaySnapshot;

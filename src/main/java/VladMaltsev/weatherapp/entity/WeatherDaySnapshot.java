@@ -1,6 +1,8 @@
 package VladMaltsev.weatherapp.entity;
 
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.springframework.format.annotation.DateTimeFormat;
@@ -12,11 +14,14 @@ import java.util.List;
 @Table(name = "weather_summary")
 @Data
 @NoArgsConstructor
+@Builder
+@AllArgsConstructor
 public class WeatherDaySnapshot {
 
     @Id
     @Column(name = "id")
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "seqGen")
+    @SequenceGenerator(name = "seqGen", sequenceName = "weather_summary_id_seq", allocationSize = 1)
     private int id;
 
     @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)

@@ -1,13 +1,16 @@
 package VladMaltsev.weatherapp.dto;
 
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import java.time.LocalDate;
 
 @Getter
 @Setter
+@Builder
+@NoArgsConstructor
+@AllArgsConstructor
+@EqualsAndHashCode(of = {"id"})
 public class WeatherDaySnapshotDTO {
     private int id;
     @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)

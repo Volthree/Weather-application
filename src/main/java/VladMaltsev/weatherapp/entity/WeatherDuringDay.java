@@ -11,7 +11,8 @@ import lombok.NoArgsConstructor;
 public class WeatherDuringDay {
     @Id
     @Column(name = "id")
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "seqGen")
+    @SequenceGenerator(name = "seqGen", sequenceName = "weather_during_day_id_seq", allocationSize = 1)
     private int id;
 
     @ManyToOne

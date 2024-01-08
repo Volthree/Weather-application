@@ -1,11 +1,9 @@
 package VladMaltsev.weatherapp.util.getdata;
 
-import VladMaltsev.weatherapp.util.exceptions.ImageNotFoundException;
+import VladMaltsev.weatherapp.exceptions.ImageNotFoundException;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.http.HttpStatus;
 import org.springframework.web.client.HttpClientErrorException;
 import org.springframework.web.client.RestTemplate;
-import org.springframework.web.server.ResponseStatusException;
 
 import java.time.LocalDate;
 
@@ -47,8 +45,9 @@ public class GetDataByTownCityDate {
         }
         catch (ImageNotFoundException e) {
             log.debug("Catch ImageNotFoundException: " + e.getMessage());
-            throw new ResponseStatusException(
-                    HttpStatus.NOT_FOUND, "Bad name Country or City or Date", e);
+//            throw new ResponseStatusException(
+//                    HttpStatus.NOT_FOUND, "Bad name Country or City or Date", e);
+            throw e;
         }
     }
 }

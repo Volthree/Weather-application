@@ -9,7 +9,9 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.Optional;
 
+import static VladMaltsev.weatherapp.util.dtoconversion.MappingDTOAndClass.mapDTOAndClass;
 import static VladMaltsev.weatherapp.util.dtoconversion.MappingDTOAndClass.mapListDTOAndListClass;
 
 @Service
@@ -27,7 +29,14 @@ public class WeatherDaySnapshotService {
         log.debug("WeatherDaySnapshot after convert DTO-Class " + weatherDaySnapshot);
         weatherDaySnapshotRepo.saveAll(weatherDaySnapshot);
         log.debug("WeatherDaySnapshot after save " + weatherDaySnapshot);
-        return MappingDTOAndClass.mapListDTOAndListClass(weatherDaySnapshot, WeatherDaySnapshotDTO.class);
+        return mapListDTOAndListClass(weatherDaySnapshot, WeatherDaySnapshotDTO.class);
+    }
+
+    @Transactional(readOnly = true)
+    public Optional<WeatherDaySnapshotDTO> findById(int id){
+        return Optional.of(
+                mapDTOAndClass(weatherDaySnapshotRepo.findById(id).get()
+                        , WeatherDaySnapshotDTO.class));
     }
 
 

@@ -1,4 +1,4 @@
-package VladMaltsev.weatherapp.util.exceptions;
+package VladMaltsev.weatherapp.exceptions;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

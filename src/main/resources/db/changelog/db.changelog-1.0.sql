@@ -1,3 +1,6 @@
+--liquibase formatted sql
+
+--changeset vladislav:1
 CREATE TABLE weather_summary
 (
     id      serial PRIMARY KEY,
@@ -17,7 +20,7 @@ CREATE TABLE weather_during_day
     temp float,
     hum float,
     wind float,
-        FOREIGN KEY (summaryid)
+    FOREIGN KEY (summaryid)
         REFERENCES weather_summary (id)
 
 );

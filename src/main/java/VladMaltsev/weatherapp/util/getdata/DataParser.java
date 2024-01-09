@@ -25,9 +25,9 @@ public class DataParser {
         List<WeatherDuringDayDTO> WeatherDuringDayDTOList = new LinkedList<>();
         for (int i = 0; i < 24; i++) {
             WeatherDuringDayDTO WeatherDuringDayDTO = new WeatherDuringDayDTO();
-            log.debug("Saving link to WeatherDaySnapshot with ID " + WeatherDaySnapshotDTO.get(pos));
+//            log.debug("Saving link to WeatherDaySnapshot with ID " + WeatherDaySnapshotDTO.get(pos));
             WeatherDuringDayDTO.setWeatherDaySnapshot(mapDTOAndClass(WeatherDaySnapshotDTO.get(pos), WeatherDaySnapshot.class));
-            log.debug("Checout correct ID in WeatherDuringDayDTO for WeatherDaySnapshotDTO " + WeatherDuringDayDTO.getWeatherDaySnapshot().toString());
+//            log.debug("Checout correct ID in WeatherDuringDayDTO for WeatherDaySnapshotDTO " + WeatherDuringDayDTO.getWeatherDaySnapshot().toString());
             WeatherDuringDayDTO.setHour(i);
             WeatherDuringDayDTO.setTemp(Float.parseFloat(jsonNode.get("days").get(pos).get("hours").get(i).get("temp").toString()));
             WeatherDuringDayDTO.setHum(Float.parseFloat(jsonNode.get("days").get(pos).get("hours").get(i).get("humidity").toString()));

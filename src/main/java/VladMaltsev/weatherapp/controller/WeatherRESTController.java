@@ -24,7 +24,6 @@ import static VladMaltsev.weatherapp.util.getdata.GetDataByTownCityDate.getData;
 @RestController
 @Slf4j
 @RequestMapping(value = "/image")
-@SessionAttributes
 public class WeatherRESTController {
 
     private final WeatherDaySnapshotService weatherDaySnapshotService;

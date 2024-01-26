@@ -1,9 +1,8 @@
-package VladMaltsev.weatherapp.servise;
+package VladMaltsev.weatherapp.service;
 
 import VladMaltsev.weatherapp.dto.WeatherDaySnapshotDTO;
 import VladMaltsev.weatherapp.entity.WeatherDaySnapshot;
 import VladMaltsev.weatherapp.repositories.WeatherDaySnapshotRepo;
-import VladMaltsev.weatherapp.util.dtoconversion.MappingDTOAndClass;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -35,7 +34,7 @@ public class WeatherDaySnapshotService {
     @Transactional(readOnly = true)
     public Optional<WeatherDaySnapshotDTO> findById(int id){
         return Optional.of(
-                mapDTOAndClass(weatherDaySnapshotRepo.findById(id).get()
+                mapDTOAndClass(weatherDaySnapshotRepo.findById(id).orElseThrow()
                         , WeatherDaySnapshotDTO.class));
     }
 

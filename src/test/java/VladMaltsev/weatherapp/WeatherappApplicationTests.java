@@ -4,13 +4,15 @@ import VladMaltsev.weatherapp.dto.WeatherDaySnapshotDTO;
 import VladMaltsev.weatherapp.entity.WeatherDaySnapshot;
 import VladMaltsev.weatherapp.repositories.WeatherDaySnapshotRepo;
 import VladMaltsev.weatherapp.repositories.WeatherDuringDayRepo;
-import VladMaltsev.weatherapp.servise.WeatherDaySnapshotService;
-import VladMaltsev.weatherapp.servise.WeatherDuringDayService;
+import VladMaltsev.weatherapp.service.WeatherDaySnapshotService;
+import VladMaltsev.weatherapp.service.WeatherDuringDayService;
 import lombok.RequiredArgsConstructor;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.Mockito;
+import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.boot.test.context.SpringBootTest;
 
 import java.util.Optional;
@@ -19,16 +21,13 @@ import static VladMaltsev.weatherapp.util.dtoconversion.MappingDTOAndClass.mapDT
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
-@SpringBootTest
+//@SpringBootTest
 @RequiredArgsConstructor
+@ExtendWith(MockitoExtension.class)
 class WeatherappApplicationTests {
 	private final int ID = 99;
 	@Mock
-	private WeatherDuringDayRepo weatherDuringDayRepo;
-	@Mock
 	private WeatherDaySnapshotRepo weatherDaySnapshotRepo;
-	@InjectMocks
-	private WeatherDuringDayService weatherDuringDayService;
 	@InjectMocks
 	private WeatherDaySnapshotService weatherDaySnapshotService;
 

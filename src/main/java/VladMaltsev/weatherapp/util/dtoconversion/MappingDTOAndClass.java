@@ -6,6 +6,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class MappingDTOAndClass {
+    private MappingDTOAndClass() {}
+
     public static <D, C> C mapDTOAndClass(D dto, Class<C> clazz) {
         ModelMapper modelMapper = new ModelMapper();
         return modelMapper.map(dto, clazz);

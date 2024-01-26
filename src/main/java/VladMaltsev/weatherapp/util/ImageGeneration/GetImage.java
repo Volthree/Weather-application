@@ -10,6 +10,7 @@ import java.io.IOException;
 import java.util.List;
 
 public class GetImage {
+    private GetImage(){}
 
     public static byte[] createGraphicsHours(List<WeatherDuringDay> weatherDuringDayList, String country, String city) throws IOException {
 

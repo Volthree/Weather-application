@@ -1,7 +1,7 @@
 --liquibase formatted sql
 
 --changeset vladislav:1
-CREATE TABLE weather_summary
+CREATE TABLE if not exists weather_summary
 (
     id      serial PRIMARY KEY,
     date    TIMESTAMP   NOT NULL,
@@ -12,14 +12,14 @@ CREATE TABLE weather_summary
 
 );
 
-CREATE TABLE weather_during_day
+CREATE TABLE if not exists weather_during_day
 (
-    id      serial PRIMARY KEY,
+    id        serial PRIMARY KEY,
     summaryid serial,
-    hour int,
-    temp float,
-    hum float,
-    wind float,
+    hour      int,
+    temp      float,
+    hum       float,
+    wind      float,
     FOREIGN KEY (summaryid)
         REFERENCES weather_summary (id)
 

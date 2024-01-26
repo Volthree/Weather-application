@@ -1,4 +1,4 @@
-package VladMaltsev.weatherapp.servise;
+package VladMaltsev.weatherapp.service;
 
 import VladMaltsev.weatherapp.dto.WeatherDuringDayDTO;
 import VladMaltsev.weatherapp.entity.WeatherDuringDay;
